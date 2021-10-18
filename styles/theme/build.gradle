@@ -1,0 +1,8 @@
+applyComposeUIDeps(this)
+
+dependencies {
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation project(path: ':styles:color')
+    implementation project(path: ':styles:shape')
+    implementation project(path: ':styles:typography')
+}

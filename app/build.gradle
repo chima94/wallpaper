@@ -1,0 +1,112 @@
+plugins {
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+
+
+    defaultConfig {
+        applicationId "com.example.wallpapers"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true"]
+            }
+        }
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            crunchPngs false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kapt {
+        correctErrorTypes = true
+        useBuildCache = true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += 'META-INF/DEPENDENCIES'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+}
+
+hilt { enableAggregatingTask = true }
+enableBuildConfig(this)
+applyRoomDeps(this)
+applyDaggerDeps(this)
+applyHiltDeps(this)
+applyMoshiDeps(this)
+applyComposeUIDeps(this)
+applyCoilDep(this)
+applyWorkerDeps(this)
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.activity:activity-compose:1.3.1'
+
+    //accompanist
+    implementation "com.google.accompanist:accompanist-insets:$accompanist"
+
+
+    //navigation
+    implementation "androidx.navigation:navigation-compose:$navigation"
+    implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
+    kapt "androidx.hilt:hilt-compiler:$hiltJetpackVersion"
+    implementation project(path: ':bottomnavigation')
+    implementation project(path: ':navigator')
+
+
+    //screens
+    implementation project(path: ':religion:religionui')
+    implementation project(path: ':nature:natureui')
+    implementation project(path: ':art:artui')
+    implementation project(path: ':search:searchui')
+
+    //styles
+    implementation project(path: ':styles:theme')
+
+    //resources
+    implementation project(path: ':resources:strings')
+}

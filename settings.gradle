@@ -1,0 +1,37 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "WallPapers"
+include ':app'
+include ':navigator'
+include ':bottomnavigation'
+
+include ':religion:religionui'
+include ':religion:religiondestination'
+
+include ':nature:natureui'
+include ':nature:naturedestination'
+
+include ':art:artui'
+include ':art:artdestination'
+
+include ':resources:strings'
+include ':resources:drawables'
+include ':resources:colors'
+
+
+include ':styles:color'
+include ':styles:shape'
+include ':styles:theme'
+include ':styles:typography'
+
+include ':resources:fonts'
+include ':components:topappbar'
+
+include ':search:searchui'
+include ':search:searchdestination'
