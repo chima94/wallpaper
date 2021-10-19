@@ -5,4 +5,9 @@
    <string name="nature">nature</string>
    <string name="art">art</string>
     <string name="search">search</string>
+    <string name="no_internet_connection">No internet, check your internet connection</string>
+    <string name="no_image_to_load">No Images to Load</string>
+    <string name="retry">retry</string>
+    <string name="images_no_connection">could not fetch images. establish an active network connection</string>
+
 </resources>

@@ -1,0 +1,22 @@
+plugins {
+    id 'kotlin-kapt'
+    id 'de.mannodermaus.android-junit5'
+}
+
+applyHiltDeps(this)
+
+
+dependencies {
+    implementation project(path: ':navigator')
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+
+
+    implementation project(path: ':constants')
+    implementation "com.github.FunkyMuse.KAHelpers:common:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:retrofit:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:collections:$KAHelpers"
+    implementation project(path: ':coroutines:dispatchers')
+    implementation project(path: ':paging')
+    implementation project(path: ':repository')
+    implementation project(path: ':network')
+}

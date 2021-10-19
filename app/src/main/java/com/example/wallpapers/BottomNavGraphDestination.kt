@@ -17,6 +17,7 @@ private val destinationsBottomNav: Map<BottomNavigationEntry, @Composable () -> 
 )
 
 
+
 fun NavGraphBuilder.addBottomNavigationDestinations(){
     destinationsBottomNav.forEach{ entry ->
         val destination = entry.key

@@ -1,0 +1,24 @@
+plugins {
+    id 'kotlin-kapt'
+}
+
+android {
+    buildFeatures{
+        buildConfig = true
+    }
+}
+applyHiltDeps(this)
+
+
+dependencies {
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.google.code.gson:gson:2.8.8"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    implementation "com.github.FunkyMuse.KAHelpers:common:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:retrofit:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:collections:$KAHelpers"
+    implementation project(path: ':constants')
+}

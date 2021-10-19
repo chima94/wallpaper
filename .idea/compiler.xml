@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="WallPapers.app" target="11" />
+      <module name="WallPapers.art.artdestination" target="11" />
+      <module name="WallPapers.art.artui" target="11" />
+      <module name="WallPapers.bottomnavigation" target="11" />
+      <module name="WallPapers.components.errorcomponent" target="11" />
+      <module name="WallPapers.components.image" target="11" />
+      <module name="WallPapers.components.loadingcomponent" target="11" />
+      <module name="WallPapers.components.topappbar" target="11" />
+      <module name="WallPapers.coroutines.appscope" target="11" />
+      <module name="WallPapers.coroutines.dispatchers" target="11" />
+      <module name="WallPapers.internetdetector" target="11" />
+      <module name="WallPapers.nature.naturedestination" target="11" />
+      <module name="WallPapers.nature.natureui" target="11" />
+      <module name="WallPapers.navigator" target="11" />
+      <module name="WallPapers.network" target="11" />
+      <module name="WallPapers.paging" target="11" />
+      <module name="WallPapers.religion.religiondata" target="11" />
+      <module name="WallPapers.religion.religiondestination" target="11" />
+      <module name="WallPapers.religion.religionui" target="11" />
+      <module name="WallPapers.repository" target="11" />
+      <module name="WallPapers.resources.colors" target="11" />
+      <module name="WallPapers.resources.drawables" target="11" />
+      <module name="WallPapers.resources.fonts" target="11" />
+      <module name="WallPapers.resources.strings" target="11" />
+      <module name="WallPapers.search.searchdestination" target="11" />
+      <module name="WallPapers.search.searchui" target="11" />
+      <module name="WallPapers.styles.color" target="11" />
+      <module name="WallPapers.styles.shape" target="11" />
+      <module name="WallPapers.styles.theme" target="11" />
+      <module name="WallPapers.styles.typography" target="11" />
+      <module name="WallPapers.toaster" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

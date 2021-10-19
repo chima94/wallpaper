@@ -12,4 +12,5 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
     implementation project(path: ':components:topappbar')
+    implementation project(path: ':components:image')
 }

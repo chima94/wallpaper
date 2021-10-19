@@ -35,3 +35,18 @@ include ':components:topappbar'
 
 include ':search:searchui'
 include ':search:searchdestination'
+include ':network'
+
+include ':constants'
+include ':paging'
+include ':internetdetector'
+include ':religion:religiondata'
+
+include ':coroutines'
+include ':coroutines:appscope'
+include ':coroutines:dispatchers'
+include ':repository'
+include ':toaster'
+include ':components:image'
+include ':components:errorcomponent'
+include ':components:loadingcomponent'

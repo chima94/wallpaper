@@ -1,0 +1,9 @@
+applyComposeUIDeps(this)
+
+dependencies {
+    //compose
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+
+    implementation project(path: ':resources:strings')
+}
