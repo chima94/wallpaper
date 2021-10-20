@@ -13,4 +13,9 @@ dependencies {
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
     implementation project(path: ':components:topappbar')
     implementation project(path: ':components:image')
+    implementation project(path: ':paging')
+    implementation project(path: ':resources:strings')
+    implementation project(path: ':network')
+    implementation project(path: ':nature:naturedata')
+    implementation project(path: ':components:errorcomponent')
 }

@@ -11,12 +11,14 @@ dependencies {
     implementation "com.github.FunkyMuse:Composed:$composed"
     implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
-
     implementation project(path: ':components:topappbar')
-    implementation project(path: ':components:errorcomponent')
     implementation project(path: ':components:image')
-    implementation project(path: ':religion:religiondata')
     implementation project(path: ':paging')
     implementation project(path: ':resources:strings')
     implementation project(path: ':network')
+    implementation project(path: ':religion:religiondata')
+    implementation project(path: ':components:errorcomponent')
+    implementation project(path: ':wallpaperdetails:detailsdestination')
+    implementation project(path: ':navigator')
+
 }

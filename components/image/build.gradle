@@ -6,7 +6,16 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "com.google.accompanist:accompanist-insets:$accompanist"
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
+    implementation "com.github.FunkyMuse:Composed:$composed"
     implementation project(path: ':network')
     implementation project(path: ':resources:strings')
     implementation project(path: ':components:loadingcomponent')
+
+    implementation project(path: ':paging')
+    implementation project(path: ':resources:strings')
+    implementation project(path: ':network')
+    implementation project(path: ':components:topappbar')
+    implementation project(path: ':components:errorcomponent')
+
 }

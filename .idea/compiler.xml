@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="WallPapers.app" target="11" />
+      <module name="WallPapers.art.artdata" target="11" />
       <module name="WallPapers.art.artdestination" target="11" />
       <module name="WallPapers.art.artui" target="11" />
       <module name="WallPapers.bottomnavigation" target="11" />
@@ -12,7 +13,9 @@
       <module name="WallPapers.components.topappbar" target="11" />
       <module name="WallPapers.coroutines.appscope" target="11" />
       <module name="WallPapers.coroutines.dispatchers" target="11" />
+      <module name="WallPapers.datarepository.repository" target="11" />
       <module name="WallPapers.internetdetector" target="11" />
+      <module name="WallPapers.nature.naturedata" target="11" />
       <module name="WallPapers.nature.naturedestination" target="11" />
       <module name="WallPapers.nature.natureui" target="11" />
       <module name="WallPapers.navigator" target="11" />
@@ -33,6 +36,11 @@
       <module name="WallPapers.styles.theme" target="11" />
       <module name="WallPapers.styles.typography" target="11" />
       <module name="WallPapers.toaster" target="11" />
+      <module name="WallPapers.wallpapadetails.detailsdestination" target="11" />
+      <module name="WallPapers.wallpapadetails.detailsui" target="11" />
+      <module name="WallPapers.wallpaperdetails.detailsdata" target="11" />
+      <module name="WallPapers.wallpaperdetails.detailsdestination" target="11" />
+      <module name="WallPapers.wallpaperdetails.detailsui" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

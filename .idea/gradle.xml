@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/art" />
+            <option value="$PROJECT_DIR$/art/artdata" />
             <option value="$PROJECT_DIR$/art/artdestination" />
             <option value="$PROJECT_DIR$/art/artui" />
             <option value="$PROJECT_DIR$/bottomnavigation" />
@@ -24,8 +25,11 @@
             <option value="$PROJECT_DIR$/coroutines" />
             <option value="$PROJECT_DIR$/coroutines/appscope" />
             <option value="$PROJECT_DIR$/coroutines/dispatchers" />
+            <option value="$PROJECT_DIR$/datarepository" />
+            <option value="$PROJECT_DIR$/datarepository/repository" />
             <option value="$PROJECT_DIR$/internetdetector" />
             <option value="$PROJECT_DIR$/nature" />
+            <option value="$PROJECT_DIR$/nature/naturedata" />
             <option value="$PROJECT_DIR$/nature/naturedestination" />
             <option value="$PROJECT_DIR$/nature/natureui" />
             <option value="$PROJECT_DIR$/navigator" />
@@ -35,7 +39,6 @@
             <option value="$PROJECT_DIR$/religion/religiondata" />
             <option value="$PROJECT_DIR$/religion/religiondestination" />
             <option value="$PROJECT_DIR$/religion/religionui" />
-            <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/resources" />
             <option value="$PROJECT_DIR$/resources/colors" />
             <option value="$PROJECT_DIR$/resources/drawables" />
@@ -50,6 +53,10 @@
             <option value="$PROJECT_DIR$/styles/theme" />
             <option value="$PROJECT_DIR$/styles/typography" />
             <option value="$PROJECT_DIR$/toaster" />
+            <option value="$PROJECT_DIR$/wallpaperdetails" />
+            <option value="$PROJECT_DIR$/wallpaperdetails/detailsdata" />
+            <option value="$PROJECT_DIR$/wallpaperdetails/detailsdestination" />
+            <option value="$PROJECT_DIR$/wallpaperdetails/detailsui" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

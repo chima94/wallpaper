@@ -9,5 +9,8 @@
     <string name="no_image_to_load">No Images to Load</string>
     <string name="retry">retry</string>
     <string name="images_no_connection">could not fetch images. establish an active network connection</string>
+    <string name="bookmark">unbookmark</string>
+    <string name="unbookedmarked">unbookmarked</string>
+    <string name="share">share</string>
 
 </resources>

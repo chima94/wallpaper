@@ -109,4 +109,8 @@ dependencies {
 
     //resources
     implementation project(path: ':resources:strings')
+
+    //detail
+    implementation project(path: ':wallpaperdetails:detailsdestination')
+    implementation project(path: ':wallpaperdetails:detailsui')
 }

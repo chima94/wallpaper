@@ -1,31 +1,64 @@
 package com.example.natureui
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
-import com.example.image.ImageUI
-import com.example.topappbar.WallpaperTopAppBar
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.runtime.*
+
+import androidx.hilt.navigation.compose.hiltViewModel
+
+import androidx.paging.compose.collectAsLazyPagingItems
+
+import com.example.errorcomponent.ErrorMessage
+
+import com.example.image.ImagesUIContent
+import com.example.naturedata.NatureViewModel
+
+import com.example.paging.PagingUIProviderViewModel
+import com.example.paging.appendState
+
+import com.funkymuse.composed.core.rememberBooleanDefaultFalse
+
+
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NatureUI(){
-    val size = Size(200.dp.value, 200.dp.value)
-    Scaffold(
-        topBar = { WallpaperTopAppBar(text = "Nature") }
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            //ImageUI()
-        }
+    val viewModel : NatureViewModel = hiltViewModel()
+    val pagingUIUIProvider: PagingUIProviderViewModel = hiltViewModel()
+    val pagingItems = viewModel.data.collectAsLazyPagingItems()
+    var progressVisibility by rememberBooleanDefaultFalse()
+    progressVisibility = pagingUIUIProvider.progressBarVisibility(pagingItems)
+
+    val scope = rememberCoroutineScope()
+
+    pagingUIUIProvider.onPaginationReachError(
+        pagingItems.appendState,
+        com.example.strings.R.string.no_image_to_load
+    )
+
+    val retry = {
+        pagingItems.refresh()
     }
+
+    ImagesUIContent(
+        pagingItems = pagingItems,
+        progressVisibility = progressVisibility,
+        retry = {
+            retry()
+        },
+        onPaggingError = {
+            pagingUIUIProvider.OnError(
+                scope = scope,
+                pagingItems = pagingItems,
+                noInternetUI = {
+                    ErrorMessage(text = com.example.strings.R.string.images_no_connection)
+                },
+                errorUI = {
+                    ErrorMessage(text = com.example.strings.R.string.images_no_connection)
+                    retry()
+                }
+            )
+        },
+        onclick = {}
+    )
 }
+

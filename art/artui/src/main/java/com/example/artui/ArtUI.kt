@@ -1,27 +1,70 @@
 package com.example.artui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.example.topappbar.WallpaperTopAppBar
 
+import androidx.compose.animation.ExperimentalAnimationApi
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+
+import com.example.artdata.ArtViewModel
+import com.example.errorcomponent.ErrorMessage
+
+import com.example.image.ImagesUIContent
+import com.example.paging.PagingUIProviderViewModel
+import com.example.paging.appendState
+import com.example.strings.R
+import com.example.topappbar.WallpaperTopAppBar
+import com.funkymuse.composed.core.rememberBooleanDefaultFalse
+import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.rememberInsetsPaddingValues
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ArtUI() {
 
-    Scaffold(
-        topBar = { WallpaperTopAppBar(text = "Art") }
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(
-                text = "Art",
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+    val viewModel : ArtViewModel = hiltViewModel()
+    val pagingUIUIProvider: PagingUIProviderViewModel = hiltViewModel()
+    val pagingItems = viewModel.data.collectAsLazyPagingItems()
+    var progressVisibility by rememberBooleanDefaultFalse()
+    progressVisibility = pagingUIUIProvider.progressBarVisibility(pagingItems)
+
+    val scope = rememberCoroutineScope()
+
+    pagingUIUIProvider.onPaginationReachError(
+        pagingItems.appendState,
+        com.example.strings.R.string.no_image_to_load
+    )
+
+    val retry = {
+        pagingItems.refresh()
     }
+
+    ImagesUIContent(
+        pagingItems = pagingItems,
+        progressVisibility = progressVisibility,
+        retry = {
+            retry()
+        },
+        onPaggingError = {
+            pagingUIUIProvider.OnError(
+                scope = scope,
+                pagingItems = pagingItems,
+                noInternetUI = {
+                    ErrorMessage(text = R.string.images_no_connection)
+                },
+                errorUI = {
+                    ErrorMessage(text = R.string.images_no_connection)
+                    retry()
+                }
+            )
+        },
+        onclick = {}
+    )
 }

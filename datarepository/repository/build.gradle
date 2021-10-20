@@ -1,0 +1,20 @@
+plugins {
+    id 'kotlin-kapt'
+    id 'de.mannodermaus.android-junit5'
+}
+
+applyHiltDeps(this)
+
+dependencies {
+    implementation "com.github.FunkyMuse.KAHelpers:coroutines:$KAHelpers"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation project(path: ':coroutines:dispatchers')
+    implementation project(path: ':network')
+    implementation project(path: ':paging')
+    implementation project(path: ':constants')
+
+    implementation "com.github.FunkyMuse.KAHelpers:common:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:retrofit:$KAHelpers"
+    implementation "com.github.FunkyMuse.KAHelpers:collections:$KAHelpers"
+}
