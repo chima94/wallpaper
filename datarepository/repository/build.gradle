@@ -13,6 +13,8 @@ dependencies {
     implementation project(path: ':network')
     implementation project(path: ':paging')
     implementation project(path: ':constants')
+    implementation project(path: ':utils')
+
 
     implementation "com.github.FunkyMuse.KAHelpers:common:$KAHelpers"
     implementation "com.github.FunkyMuse.KAHelpers:retrofit:$KAHelpers"

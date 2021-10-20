@@ -1,19 +1,29 @@
 package com.example.detailsui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
+import com.example.detailsdata.DetailsDataState
 import com.example.detailsdata.DetailsViewModel
+import com.example.network.response.CommonPic
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
@@ -21,11 +31,23 @@ import com.google.accompanist.insets.statusBarsPadding
 fun DetailUI(){
 
     val viewModel: DetailsViewModel = hiltViewModel()
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val stateFlowLifecycleAware = remember(viewModel.state, lifecycleOwner){
+        viewModel.state.flowWithLifecycle(lifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+    }
+    val state by stateFlowLifecycleAware.collectAsState(initial = DetailsDataState())
+    var loadImage by remember{ mutableStateOf(true)}
 
    Scaffold(
        topBar = {
            TopAppBar(
-               title={},
+               title={
+                   state.commonPic?.tags?.let {
+                       Text(
+                           text = it
+                       )
+                   }
+               },
                navigationIcon = {
                     IconButton(onClick = { viewModel.navigateUp() }) {
                        Icon(
@@ -42,10 +64,15 @@ fun DetailUI(){
            Box(
                modifier = Modifier.fillMaxSize()
            ){
-               Text(
-                   text = "Details",
-                   modifier = Modifier.align(Alignment.Center)
-               )
+               if(state.isLoading || loadImage){
+                   CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+               }
+               state.commonPic?.let { commonPic -> ImageContent(
+                   commonPic = commonPic
+               ) }
+               FloatingBar(modifier = Modifier
+                   .align(Alignment.BottomCenter)
+                   .padding(bottom = 92.dp))
            }
        },
        bottomBar = {
@@ -54,6 +81,51 @@ fun DetailUI(){
    )
 }
 
+
+
+@Composable
+fun FloatingBar(modifier: Modifier){
+    Box(
+        modifier = modifier
+    ) {
+        FloatingActionButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(imageVector = Icons.Filled.Save, contentDescription = null)
+        }
+    }
+}
+
+
+@Composable
+fun ImageContent(
+    commonPic: CommonPic
+){
+
+    val painter = rememberImagePainter(
+        data = commonPic.fullHDURL
+    )
+
+    when(painter.state){
+        is ImagePainter.State.Loading ->{
+            Box(modifier = Modifier.fillMaxWidth(),contentAlignment = Alignment.Center){
+            }
+        }
+        is ImagePainter.State.Success,  ImagePainter.State.Empty , is ImagePainter.State.Error->{
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
+
+                Image(
+                    painter = painter,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(commonPic.height.dp),
+                    contentScale = ContentScale.Fit
+                )
+            }
+        }
+    }
+}
 
 @Composable
 private fun BottomBar(

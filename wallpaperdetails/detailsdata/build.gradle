@@ -19,4 +19,5 @@ dependencies {
     implementation project(path: ':paging')
     implementation project(path: ':datarepository:repository')
     implementation project(path: ':network')
+    implementation project(path: ':utils')
 }

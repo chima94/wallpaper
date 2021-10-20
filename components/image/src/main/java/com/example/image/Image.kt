@@ -48,7 +48,7 @@ fun ImagesUIContent(
     progressVisibility: Boolean,
     retry: () -> Unit,
     onPaggingError: @Composable () -> Unit,
-    onclick: (picUrl: String) -> Unit
+    onclick: (commonPic: Int) -> Unit
 ) {
     Scaffold(
         topBar = { WallpaperTopAppBar(text = "Nature")}
@@ -103,7 +103,7 @@ fun ImagesUIContent(
 
 
 @Composable
-fun Image(commonPic: CommonPic, onclick: (picUrl : String) ->Unit){
+fun Image(commonPic: CommonPic, onclick: (id : Int) ->Unit){
     val painter = rememberImagePainter(
         data = commonPic.url,
         builder = {
@@ -117,7 +117,7 @@ fun Image(commonPic: CommonPic, onclick: (picUrl : String) ->Unit){
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .clickable { onclick(commonPic.fullHDURL!!) },
+            .clickable { onclick(commonPic.id!!) },
         elevation = 2.dp
     ) {
         when(painter.state){

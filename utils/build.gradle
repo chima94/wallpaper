@@ -1,0 +1,6 @@
+applyComposeUIDeps(this)
+
+dependencies {
+    implementation project(path: ':toaster')
+
+}

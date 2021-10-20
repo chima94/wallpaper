@@ -19,6 +19,7 @@ import com.example.strings.R
 
 import com.funkymuse.composed.core.rememberBooleanDefaultFalse
 
+
 @OptIn(ExperimentalAnimationApi::class,
     androidx.compose.foundation.ExperimentalFoundationApi::class
 )
@@ -62,8 +63,8 @@ fun ReligionUI(){
             )
         },
 
-        onclick = {imageUri ->
-            viewModel.navigate(DetailsDestination.createWallPaperDetailsRoute(imageUri = "boy"))
+        onclick = {id ->
+            viewModel.navigate(DetailsDestination.createWallPaperDetailsRoute(imageUri = id.toString()))
         }
     )
 }

@@ -13,4 +13,7 @@ dependencies {
     implementation project(path: ':resources:strings')
     implementation project(path: ':wallpaperdetails:detailsdata')
     implementation project(path: ':navigator')
+    implementation project(path: ':network')
+    implementation project(path: ':utils')
+    implementation project(path: ':components:loadingcomponent')
 }

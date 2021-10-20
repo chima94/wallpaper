@@ -12,4 +12,9 @@ interface ApiService{
         @Query("q") query: String,
         @Query("page") index: Int
     ): Response<PicDto>
+
+    @GET("?key=23893744-79719072ba4601b17f3955f8d")
+    suspend fun getPixabayPicturesId(
+        @Query("id") id: Int
+    ): Response<PicDto>
 }

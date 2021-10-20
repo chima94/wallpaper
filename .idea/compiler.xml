@@ -36,6 +36,7 @@
       <module name="WallPapers.styles.theme" target="11" />
       <module name="WallPapers.styles.typography" target="11" />
       <module name="WallPapers.toaster" target="11" />
+      <module name="WallPapers.utils" target="11" />
       <module name="WallPapers.wallpapadetails.detailsdestination" target="11" />
       <module name="WallPapers.wallpapadetails.detailsui" target="11" />
       <module name="WallPapers.wallpaperdetails.detailsdata" target="11" />
