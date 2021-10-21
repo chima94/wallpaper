@@ -12,5 +12,7 @@
     <string name="bookmark">unbookmark</string>
     <string name="unbookedmarked">unbookmarked</string>
     <string name="share">share</string>
+    <string name="search_error">search must contain minimum of 3 characters</string>
+    <string name="search_input_explain">Search by wallpaper category</string>
 
 </resources>
