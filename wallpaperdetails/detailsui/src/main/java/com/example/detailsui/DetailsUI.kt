@@ -1,5 +1,14 @@
 package com.example.detailsui
 
+import android.Manifest
+import android.app.WallpaperManager
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -7,10 +16,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
@@ -21,22 +31,69 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.crazylegend.toaster.Toaster
 import com.example.detailsdata.DetailsDataState
 import com.example.detailsdata.DetailsViewModel
 import com.example.network.response.CommonPic
+import com.example.toaster.ToasterViewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionRequired
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.lang.Exception
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun DetailUI(){
 
     val viewModel: DetailsViewModel = hiltViewModel()
+    val toaster: ToasterViewModel = hiltViewModel()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
     val stateFlowLifecycleAware = remember(viewModel.state, lifecycleOwner){
         viewModel.state.flowWithLifecycle(lifecycleOwner.lifecycle, Lifecycle.State.STARTED)
     }
     val state by stateFlowLifecycleAware.collectAsState(initial = DetailsDataState())
     var loadImage by remember{ mutableStateOf(true)}
+    val permissionState = rememberPermissionState(permission = Manifest.permission.SET_WALLPAPER)
+    var doNotShowMeRationale by rememberSaveable {
+        mutableStateOf(false)
+    }
+    var setWallpaper by remember{ mutableStateOf(false)}
+    var onLoadBitmap by remember { mutableStateOf(false)}
+
+/*
+        RequirePermission(
+            permissionState = permissionState,
+            toaster = toaster,
+            doNotShowMeRationale = doNotShowMeRationale,
+            onResetPermission = {setWallpaper = false}
+        )*/
+
+
+
+    if(setWallpaper){
+        state.commonPic?.fullHDURL?.let {
+            SetAsWallpaper(
+                context = context,
+                uri = it,
+                onloadingImage = {
+                    onLoadBitmap = it
+                }
+            )
+            setWallpaper = false
+        }
+    }
 
    Scaffold(
        topBar = {
@@ -64,15 +121,27 @@ fun DetailUI(){
            Box(
                modifier = Modifier.fillMaxSize()
            ){
+               if(onLoadBitmap){
+                   CircularProgressIndicator(modifier = Modifier.align(Alignment.TopCenter))
+               }
                if(state.isLoading || loadImage){
                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                }
                state.commonPic?.let { commonPic -> ImageContent(
                    commonPic = commonPic
                ) }
-               FloatingBar(modifier = Modifier
-                   .align(Alignment.BottomCenter)
-                   .padding(bottom = 92.dp))
+               FloatingBar(
+                   modifier = Modifier
+                       .align(Alignment.BottomCenter)
+                       .padding(bottom = 92.dp),
+                   onClick = {
+                       if(!permissionState.hasPermission){
+                           Log.i("PERMISSION", "No permission granted")
+                       }else{
+                            setWallpaper = true
+                       }
+                   }
+               )
            }
        },
        bottomBar = {
@@ -84,12 +153,15 @@ fun DetailUI(){
 
 
 @Composable
-fun FloatingBar(modifier: Modifier){
+fun FloatingBar(
+    modifier: Modifier,
+    onClick: () -> Unit
+){
     Box(
         modifier = modifier
     ) {
         FloatingActionButton(
-            onClick = { /*TODO*/ }
+            onClick = onClick
         ) {
             Icon(imageVector = Icons.Filled.Save, contentDescription = null)
         }
@@ -195,3 +267,116 @@ fun ShareButton(onClick: () -> Unit) {
         )
     }
 }
+
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun RequirePermission(
+    permissionState: PermissionState,
+    toaster: ToasterViewModel,
+    doNotShowMeRationale: Boolean,
+    onResetPermission: () -> Unit
+){
+
+    PermissionRequired(
+        permissionState = permissionState,
+        permissionNotGrantedContent = {
+            if(doNotShowMeRationale){
+                toaster.longToast("permission is denied, open settings to grant permission")
+            }else{
+                permissionState.launchPermissionRequest()
+
+            }
+        },
+        permissionNotAvailableContent = {
+            toaster.longToast("Opening settings.......")
+            onResetPermission()
+        },
+        content = {
+            toaster.longToast("Permission is granted, you can go ahead")
+
+        }
+    )
+}
+
+@Composable
+private fun SetAsWallpaper(
+    context: Context,
+    uri: String,
+    onloadingImage: (loading: Boolean) ->  Unit
+){
+    val scope = rememberCoroutineScope()
+    val manager = WallpaperManager.getInstance(context)
+
+
+
+     LaunchedEffect(true){
+         scope.launch {
+             try {
+                 onloadingImage(true)
+                 val imageUri = getBitmap(uri = uri, context = context)
+                 imageUri?.let {
+                     val path = getImageUri(it, context)
+                     context.startActivity(Intent(manager.getCropAndSetWallpaperIntent(path)))
+                     onloadingImage(false)
+                 }
+                 //context.startActivity(Intent(manager.getCropAndSetWallpaperIntent()))
+             }catch (e: Exception){
+                Log.i("ERROR", "$e")
+             }
+         }
+     }
+
+}
+
+
+
+
+private fun  getBitmap(
+    uri: String,
+    context: Context
+): Bitmap?{
+    var bitmap: Bitmap? = null
+    try{
+        bitmap = Glide.with(context)
+            .asBitmap()
+            .load(uri)
+            .submit()
+            .get()
+    }catch (e: IOException){
+
+    }
+    return bitmap
+}
+
+
+
+private fun getImageUri(bitmap: Bitmap, context: Context): Uri{
+    val byte = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byte)
+    val path = MediaStore.Images.Media.insertImage(
+        context.contentResolver, bitmap, "Title",null
+    )
+    return Uri.parse(path)
+}
+
+
+/*@Composable
+fun LoadImage(url : String) : MutableState<Bitmap?>{
+    val bitmapState : MutableState<Bitmap?> =remember{ mutableStateOf(null)}
+
+    Glide.with(LocalContext.current)
+        .asBitmap()
+        .load(url)
+        .into(object : CustomTarget<Bitmap>(){
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                bitmapState.value = resource
+
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+            }
+
+        })
+    return bitmapState
+}*/
