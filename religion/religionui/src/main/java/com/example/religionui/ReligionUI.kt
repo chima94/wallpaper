@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
@@ -65,6 +66,7 @@ fun ReligionUI(){
 
         onclick = {id ->
             viewModel.navigate(DetailsDestination.createWallPaperDetailsRoute(imageUri = id.toString()))
-        }
+        },
+        topBarText = stringResource(id = R.string.religion)
     )
 }

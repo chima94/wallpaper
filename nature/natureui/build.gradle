@@ -18,4 +18,6 @@ dependencies {
     implementation project(path: ':network')
     implementation project(path: ':nature:naturedata')
     implementation project(path: ':components:errorcomponent')
+    implementation project(path: ':navigator')
+    implementation project(path: ':wallpaperdetails:detailsdestination')
 }

@@ -3,10 +3,12 @@ package com.example.natureui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 
 import androidx.hilt.navigation.compose.hiltViewModel
 
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.detailsdestination.DetailsDestination
 
 import com.example.errorcomponent.ErrorMessage
 
@@ -15,6 +17,7 @@ import com.example.naturedata.NatureViewModel
 
 import com.example.paging.PagingUIProviderViewModel
 import com.example.paging.appendState
+import com.example.strings.R
 
 import com.funkymuse.composed.core.rememberBooleanDefaultFalse
 
@@ -50,15 +53,19 @@ fun NatureUI(){
                 scope = scope,
                 pagingItems = pagingItems,
                 noInternetUI = {
-                    ErrorMessage(text = com.example.strings.R.string.images_no_connection)
+                    ErrorMessage(text = R.string.images_no_connection)
                 },
                 errorUI = {
-                    ErrorMessage(text = com.example.strings.R.string.images_no_connection)
+                    ErrorMessage(text = R.string.images_no_connection)
                     retry()
                 }
             )
         },
-        onclick = {}
+
+        onclick = {id ->
+            viewModel.navigate(DetailsDestination.createWallPaperDetailsRoute(imageUri = id.toString()))
+        },
+        topBarText = stringResource(id = R.string.nature)
     )
 }
 

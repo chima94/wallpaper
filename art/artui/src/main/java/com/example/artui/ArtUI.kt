@@ -7,11 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 
 import com.example.artdata.ArtViewModel
+import com.example.detailsdestination.DetailsDestination
 import com.example.errorcomponent.ErrorMessage
 
 import com.example.image.ImagesUIContent
@@ -65,6 +67,9 @@ fun ArtUI() {
                 }
             )
         },
-        onclick = {}
+        onclick = {id->
+            viewModel.navigate(DetailsDestination.createWallPaperDetailsRoute(id.toString()))
+        },
+        topBarText = stringResource(id = R.string.art)
     )
 }

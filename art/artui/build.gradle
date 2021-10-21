@@ -22,5 +22,7 @@ dependencies {
         implementation project(path: ':network')
         implementation project(path: ':art:artdata')
         implementation project(path: ':components:errorcomponent')
+        implementation project(path: ':wallpaperdetails:detailsdestination')
+        implementation project(path: ':navigator')
     }
 }
