@@ -4,5 +4,5 @@ object Constants {
 
     const val BASE_URL = "https://pixabay.com/api/"
     const val QUERY = "query"
-    const val key = ""
+    const val key = "your_key"
 }
