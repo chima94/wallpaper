@@ -2,13 +2,6 @@
 ## This repository is currently in progress!
 This project demonstrates the use of jetpack compose and modularization.
 it is completely independent and opensource.
-## Screenshots
-![Screenshot_20211022-103249](https://user-images.githubusercontent.com/38965315/138437821-873ee27a-a008-4009-9709-6221c6684c0d.png)
-![Screenshot_20211022-103336](https://user-images.githubusercontent.com/38965315/138437900-9751a00c-05cc-4748-b305-49219aee6b4a.png)
-![Screenshot_20211022-103401](https://user-images.githubusercontent.com/38965315/138437931-e7985f2a-7636-4d9d-906e-5ef4f3abf1cf.png)
-![Screenshot_20211022-103423](https://user-images.githubusercontent.com/38965315/138438127-78d76c9a-4342-45d2-ac50-5a2b1a3e08db.png)
-![Screenshot_20211022-103433](https://user-images.githubusercontent.com/38965315/138437988-fbff75f0-55c3-4636-ab04-5a76c5e90a67.png)
-
 ## Built with
 Some of the popular libraries and MVVM clean architecture used with in progress (Room database) as a source
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
@@ -30,3 +23,9 @@ Some of the popular libraries and MVVM clean architecture used with in progress 
     - Clean Architecture
     - Multi-Module
     - MVVM
+## Screenshots
+![Screenshot_20211022-103249](https://user-images.githubusercontent.com/38965315/138437821-873ee27a-a008-4009-9709-6221c6684c0d.png)
+![Screenshot_20211022-103336](https://user-images.githubusercontent.com/38965315/138437900-9751a00c-05cc-4748-b305-49219aee6b4a.png)
+![Screenshot_20211022-103401](https://user-images.githubusercontent.com/38965315/138437931-e7985f2a-7636-4d9d-906e-5ef4f3abf1cf.png)
+![Screenshot_20211022-103423](https://user-images.githubusercontent.com/38965315/138438127-78d76c9a-4342-45d2-ac50-5a2b1a3e08db.png)
+![Screenshot_20211022-103433](https://user-images.githubusercontent.com/38965315/138437988-fbff75f0-55c3-4636-ab04-5a76c5e90a67.png)
