@@ -1,5 +1,5 @@
 # wallpaper
-## This repository is currently in progress!
+### get your API key at [pixabay](https://pixabay.com/) in order to test the APP!
 This project demonstrates the use of jetpack compose and modularization.
 it is completely independent and opensource.
 ## Built with
