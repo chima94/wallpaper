@@ -83,7 +83,7 @@ fun DetailUI(){
 
 
     if(setWallpaper){
-        state.commonPic?.fullHDURL?.let {
+        state.commonPic?.url?.let {
             SetAsWallpaper(
                 context = context,
                 uri = it,
@@ -322,7 +322,8 @@ private fun SetAsWallpaper(
                  }
                  //context.startActivity(Intent(manager.getCropAndSetWallpaperIntent()))
              }catch (e: Exception){
-                Log.i("ERROR", "$e")
+
+
              }
          }
      }

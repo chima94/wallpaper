@@ -7,10 +7,13 @@ import androidx.navigation.compose.composable
 import com.example.detailsdestination.DetailsDestination
 import com.example.detailsui.DetailUI
 import com.example.navigator.NavigationDestination
+import com.example.searchresultdestination.SearchResultDestination
+import com.example.searchresultui.SearchResult
 
 @OptIn(ExperimentalMaterialApi::class)
 private val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-    DetailsDestination to { DetailUI()}
+    DetailsDestination to { DetailUI()},
+    SearchResultDestination to { SearchResult()}
 )
 
 fun NavGraphBuilder.addComposableDestinations() {

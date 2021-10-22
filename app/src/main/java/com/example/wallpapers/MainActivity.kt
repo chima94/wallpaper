@@ -20,6 +20,7 @@ import com.example.bottomnavigation.WallpaperBottomNavigation
 import com.example.detailsdestination.DetailsDestination
 import com.example.navigator.Navigator
 import com.example.navigator.NavigatorEvent
+import com.example.searchresultdestination.SearchResultDestination
 import com.example.theme.WallpapersTheme
 import com.example.wallpapers.navigation.addComposableDestinations
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -55,7 +56,8 @@ class MainActivity : ComponentActivity() {
 
 
 private val hideBottomNavFromDestinationRoutes = listOf(
-    DetailsDestination.route()
+    DetailsDestination.route(),
+    SearchResultDestination.route()
 )
 
 @Composable

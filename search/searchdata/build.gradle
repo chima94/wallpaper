@@ -1,0 +1,11 @@
+plugins {
+    id 'kotlin-kapt'
+    id 'de.mannodermaus.android-junit5'
+}
+
+applyHiltDeps(this)
+
+dependencies {
+    implementation project(path: ':navigator')
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+}

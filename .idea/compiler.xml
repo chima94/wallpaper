@@ -29,8 +29,12 @@
       <module name="WallPapers.resources.drawables" target="11" />
       <module name="WallPapers.resources.fonts" target="11" />
       <module name="WallPapers.resources.strings" target="11" />
+      <module name="WallPapers.search.searchdata" target="11" />
       <module name="WallPapers.search.searchdestination" target="11" />
       <module name="WallPapers.search.searchui" target="11" />
+      <module name="WallPapers.searchresult.searchresultdata" target="11" />
+      <module name="WallPapers.searchresult.searchresultdestination" target="11" />
+      <module name="WallPapers.searchresult.searchresultui" target="11" />
       <module name="WallPapers.styles.color" target="11" />
       <module name="WallPapers.styles.shape" target="11" />
       <module name="WallPapers.styles.theme" target="11" />

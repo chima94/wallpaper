@@ -113,4 +113,8 @@ dependencies {
     //detail
     implementation project(path: ':wallpaperdetails:detailsdestination')
     implementation project(path: ':wallpaperdetails:detailsui')
+
+    //search result
+    implementation project(path: ':searchresult:searchresultdestination')
+    implementation project(path: ':searchresult:searchresultui')
 }

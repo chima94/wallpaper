@@ -9,5 +9,8 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
     implementation project(path: ':resources:strings')
     implementation project(path: ':toaster')
+    implementation project(path: ':search:searchdata')
+    implementation project(path: ':searchresult:searchresultdestination')
+    implementation project(path: ':navigator')
 
 }

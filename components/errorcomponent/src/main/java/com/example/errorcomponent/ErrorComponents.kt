@@ -1,5 +1,6 @@
 package com.example.errorcomponent
 
+import android.graphics.Paint
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
@@ -15,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +32,7 @@ fun ErrorAnimation(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
 
 
-    val color by infiniteTransition.animateColor(
+    val colors by infiniteTransition.animateColor(
         initialValue = MaterialTheme.colors.primary,
         targetValue = MaterialTheme.colors.secondary,
         animationSpec = infiniteRepeatable(
@@ -50,39 +53,25 @@ fun ErrorAnimation(modifier: Modifier = Modifier) {
         )
     )
 
-    Canvas(
-        modifier = modifier
-    ) {
-        val (width, height) = size
 
-        val rightLineOffsetEnd = Offset(width, height)
-        val startingPoint = Offset(width / 2, 0f)
-        drawLine(
-            color = color,
-            start = startingPoint,
-            end = rightLineOffsetEnd,
-            strokeWidth = scale,
-            cap = StrokeCap.Round
-        )
+        val paint = Paint().apply {
+            textAlign = Paint.Align.CENTER
+            textSize = 400f
+            color = colors.toArgb()
+            //typeface = Typeface.createFromAsset(assetManager, "FACEBOLF.OTF")
+        }
+        Canvas(
+            modifier = modifier
+        ) {
 
-        val leftLineHeightEnd = Offset(0f, height)
-        drawLine(
-            color = color,
-            start = startingPoint,
-            end = leftLineHeightEnd,
-            strokeWidth = scale,
-            cap = StrokeCap.Round
-        )
+            drawContext.canvas.nativeCanvas.drawText(
+                "W",
+                center.x + 25,
+                center.y + 90,
+                paint,
 
-        val startMiddleOffset = Offset(startingPoint.x / 2, height / 2)
-        drawLine(
-            color = color,
-            start = startMiddleOffset,
-            end = Offset((startingPoint.x / 2) * 3, startMiddleOffset.y),
-            strokeWidth = scale,
-            cap = StrokeCap.Round
-        )
-    }
+                )
+        }
 }
 
 

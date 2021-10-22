@@ -12,7 +12,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    implementation "com.github.FunkyMuse:Composed:$composed"
+    //implementation "com.github.FunkyMuse:Composed:$composed"
     implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
     implementation project(path: ':resources:strings')
     implementation project(path: ':wallpaperdetails:detailsdata')

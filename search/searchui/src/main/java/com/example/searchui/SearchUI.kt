@@ -4,9 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
@@ -24,17 +22,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.searchdata.SearchViewModel
+import com.example.searchresultdestination.SearchResultDestination
 import com.example.toaster.ToasterViewModel
 
 @Composable
 fun SearchUI(){
+    val viewModel: SearchViewModel = hiltViewModel()
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.Center)) {
-            SearchInput(){}
+            SearchInput(){query ->
+                viewModel.navigate(SearchResultDestination.createSearchRoute(query))
+            }
             SearchInputExplained()
         }
     }
@@ -83,6 +86,7 @@ fun SearchInput(
             }
             keyboardController?.hide()
             onInputText(inputText)
-        })
+        }),
+
     )
 }

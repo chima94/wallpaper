@@ -1,0 +1,25 @@
+applyComposeUIDeps(this)
+applyCoilDep(this)
+
+dependencies {
+    //accompanist
+    implementation "com.google.accompanist:accompanist-insets:$accompanist"
+    //compose
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+
+    implementation "com.github.FunkyMuse:Composed:$composed"
+    implementation "androidx.hilt:hilt-navigation-compose:$navigation_compose"
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist"
+    implementation project(path: ':components:topappbar')
+    implementation project(path: ':components:image')
+    implementation project(path: ':paging')
+    implementation project(path: ':resources:strings')
+    implementation project(path: ':network')
+    implementation project(path: ':religion:religiondata')
+    implementation project(path: ':components:errorcomponent')
+    implementation project(path: ':wallpaperdetails:detailsdestination')
+    implementation project(path: ':navigator')
+    implementation project(path: ':searchresult:searchresultdata')
+
+}

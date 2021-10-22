@@ -45,8 +45,13 @@
             <option value="$PROJECT_DIR$/resources/fonts" />
             <option value="$PROJECT_DIR$/resources/strings" />
             <option value="$PROJECT_DIR$/search" />
+            <option value="$PROJECT_DIR$/search/searchdata" />
             <option value="$PROJECT_DIR$/search/searchdestination" />
             <option value="$PROJECT_DIR$/search/searchui" />
+            <option value="$PROJECT_DIR$/searchresult" />
+            <option value="$PROJECT_DIR$/searchresult/searchresultdata" />
+            <option value="$PROJECT_DIR$/searchresult/searchresultdestination" />
+            <option value="$PROJECT_DIR$/searchresult/searchresultui" />
             <option value="$PROJECT_DIR$/styles" />
             <option value="$PROJECT_DIR$/styles/color" />
             <option value="$PROJECT_DIR$/styles/shape" />
