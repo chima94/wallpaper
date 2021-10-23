@@ -45,6 +45,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
@@ -87,6 +89,7 @@ fun DetailUI(){
             SetAsWallpaper(
                 context = context,
                 uri = it,
+                toaster,
                 onloadingImage = {
                     onLoadBitmap = it
                 }
@@ -303,6 +306,7 @@ fun RequirePermission(
 private fun SetAsWallpaper(
     context: Context,
     uri: String,
+    toaster: ToasterViewModel,
     onloadingImage: (loading: Boolean) ->  Unit
 ){
     val scope = rememberCoroutineScope()
@@ -322,8 +326,8 @@ private fun SetAsWallpaper(
                  }
                  //context.startActivity(Intent(manager.getCropAndSetWallpaperIntent()))
              }catch (e: Exception){
-
-
+                toaster.shortToast("Opps! something Went wrong, please try again")
+                 onloadingImage(false)
              }
          }
      }
@@ -362,22 +366,4 @@ private fun getImageUri(bitmap: Bitmap, context: Context): Uri{
 }
 
 
-/*@Composable
-fun LoadImage(url : String) : MutableState<Bitmap?>{
-    val bitmapState : MutableState<Bitmap?> =remember{ mutableStateOf(null)}
 
-    Glide.with(LocalContext.current)
-        .asBitmap()
-        .load(url)
-        .into(object : CustomTarget<Bitmap>(){
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                bitmapState.value = resource
-
-            }
-
-            override fun onLoadCleared(placeholder: Drawable?) {
-            }
-
-        })
-    return bitmapState
-}*/
